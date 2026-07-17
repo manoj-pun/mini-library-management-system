@@ -44,7 +44,18 @@ INSTALLED_APPS = [
 
     #rest framework
     "rest_framework",
+
+    #apps
+    "apps.authors.apps.AuthorsConfig",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS":"apps.common.pagination.CustomPagination",
+    "DEFAULT_FILTER_BACKENDS":[
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter"
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
