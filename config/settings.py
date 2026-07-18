@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     #apps
     "apps.authors.apps.AuthorsConfig",
+    "apps.books.apps.BooksConfig",
 ]
 
 REST_FRAMEWORK = {
