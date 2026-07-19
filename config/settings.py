@@ -46,9 +46,12 @@ INSTALLED_APPS = [
     "rest_framework",
 
     #apps
+    "apps.users.apps.UsersConfig",
     "apps.authors.apps.AuthorsConfig",
     "apps.books.apps.BooksConfig",
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS":"apps.common.pagination.CustomPagination",
