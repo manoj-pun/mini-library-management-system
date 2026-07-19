@@ -28,10 +28,10 @@ class AuthorCreateUpdateSerializer(serializers.ModelSerializer):
 class AuthorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ["author_id", "first_name", "last_name", "birth_date"]
+        fields = ["id", "first_name", "last_name", "birth_date"]
 
 
 class AuthorDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ["author_id", "first_name", "last_name", "birth_date", "created_at", "updated_at"]
+        fields = ["id", "first_name", "last_name", "birth_date", "created_at", "updated_at"]

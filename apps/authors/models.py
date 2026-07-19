@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 
 class Author(models.Model):
-    author_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
