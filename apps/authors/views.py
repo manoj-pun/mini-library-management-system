@@ -5,9 +5,11 @@ from .serializers import (
     AuthorDetailSerializer,
     AuthorListSerializer
 )
+from apps.common.permissions import IsLibrarian
 
 class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
+    permission_classes = [IsLibrarian]
     search_fields = ["first_name", "last_name"]
     ordering_fields = ["first_name","birth_date","created_at"]
 
