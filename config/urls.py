@@ -31,4 +31,5 @@ urlpatterns = [
 
     path('api/', include("apps.authors.urls")),
     path('api/', include("apps.books.urls")),
+    path('api/', include("apps.members.urls")),
 ]

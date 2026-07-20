@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "apps.users.apps.UsersConfig",
     "apps.authors.apps.AuthorsConfig",
     "apps.books.apps.BooksConfig",
+    "apps.members.apps.MembersConfig",
 ]
 
 AUTH_USER_MODEL = "users.User"
