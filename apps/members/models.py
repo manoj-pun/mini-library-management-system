@@ -25,28 +25,28 @@ class Member(models.Model):
         db_table = "members"
         ordering = ["-joined_date"]
 
-    # @property
-    # def active_borrow_count(self):
-    #     return self.borrow_records.filter(status="BORROWED").count()
+    @property
+    def active_borrow_count(self):
+        return self.borrow_records.filter(status="BORROWED").count()
 
-    # @property
-    # def has_overdue_books(self):
-    #     return any(
-    #         record.is_overdue for record in self.borrow_records.filter(status="BORROWED")
-    #     )
+    @property
+    def has_overdue_books(self):
+        return any(
+            record.is_overdue for record in self.borrow_records.filter(status="BORROWED")
+        )
 
-    # @property
-    # def has_unpaid_fines(self):
-    #     return self.borrow_records.filter(fine_amount__gt=0, fine_paid=False).exists()
+    @property
+    def has_unpaid_fines(self):
+        return self.borrow_records.filter(fine_amount__gt=0, fine_paid=False).exists()
 
-    # @property
-    # def can_borrow_more(self):
-    #     return (
-    #         self.status == self.MembershipStatus.ACTIVE
-    #         and self.active_borrow_count < self.max_books_allowed
-    #         and not self.has_overdue_books
-    #         and not self.has_unpaid_fines
-    #     )
+    @property
+    def can_borrow_more(self):
+        return (
+            self.status == self.MembershipStatus.ACTIVE
+            and self.active_borrow_count < self.max_books_allowed
+            and not self.has_overdue_books
+            and not self.has_unpaid_fines
+        )
 
 
 
