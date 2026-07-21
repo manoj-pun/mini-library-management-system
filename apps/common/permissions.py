@@ -5,3 +5,10 @@ class IsLibrarian(BasePermission):
 
     def has_permission(self,request,view):
         return request.user.is_authenticated and request.user.role == "LIBRARIAN"
+    
+
+class IsMember(BasePermission):
+    message = "Only members can access this resource."
+
+    def has_permission(self, request, view):
+        return (request.user.is_authenticated and request.user.role == "MEMBER")
