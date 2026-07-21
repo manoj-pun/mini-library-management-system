@@ -8,7 +8,12 @@ from .serializers import (
 from apps.common.permissions import IsLibrarian
 
 class AuthorViewSet(ModelViewSet):
-    queryset = Author.objects.all()
+
+    """
+    Viewset for managing authors.
+    """
+
+    queryset = Author.objects.prefetch_related("books")
     permission_classes = [IsLibrarian]
     search_fields = ["first_name", "last_name"]
     ordering_fields = ["first_name","birth_date","created_at"]
