@@ -8,6 +8,11 @@ from .serializers import (
 )
 
 class BookViewSet(ModelViewSet):
+
+    """
+    Viewset for managing books.
+    """
+
     queryset = Book.objects.all()
     permission_classes = [IsLibrarian]
     search_fields = ["title", "genre"]

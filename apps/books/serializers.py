@@ -3,12 +3,22 @@ from .models import Book
 from apps.authors.models import Author
 
 class AuthorNestedSerializer(serializers.ModelSerializer):
+
+    """
+    Serializer class to show the authors.
+    """
+
     class Meta:
         model = Author
         fields = ["id", "first_name", "last_name"]
 
 
 class BookCreateUpdateSerializer(serializers.ModelSerializer):
+
+    """
+    Serializer class to create and update books.
+    """
+
     class Meta:
         model = Book
         fields = ["title", "authors", "isbn", "genre", "published_date", "total_copies"]
@@ -27,12 +37,22 @@ class BookCreateUpdateSerializer(serializers.ModelSerializer):
 
 
 class BookListSerializer(serializers.ModelSerializer):
+
+    """
+    Serializer class for listing books.
+    """
+
     class Meta:
         model = Book
         fields = ["id", "title", "isbn", "available_copies"]
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
+
+    """
+    Serializer class for retrieving book details.
+    """
+
     authors = AuthorNestedSerializer(many=True, read_only=True)
 
     class Meta:
