@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from datetime import timezone
+from django.utils import timezone
 
 class Borrowing(models.Model):
     class BorrowStatus(models.TextChoices):
@@ -23,7 +23,7 @@ class Borrowing(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "borrow_books"
+        db_table = "borrowings"
         ordering = ["-borrowed_date"]
 
     def __str__(self):
