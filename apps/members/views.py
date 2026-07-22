@@ -17,7 +17,7 @@ class MemberViewSet(ModelViewSet):
     """
     ViewSet for managing library members.
 
-    Librarians can create, retrieve, update, and delete members.
+    Librarians can create, retrieve, update, suspend, and reactivate members.
     Authenticated members can access their own profile through the
     `me` action.
     """
@@ -41,6 +41,20 @@ class MemberViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         member = serializer.save()
         return Response(MemberDetailSerializer(member).data,status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=["post"], url_path="suspend")
+    def suspend(self, request, pk=None):
+        member = self.get_object()
+        member.status = Member.MembershipStatus.SUSPENDED
+        member.save(update_fields=["status"])
+        return Response({"message": "Member suspended."},status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="reactivate")
+    def reactivate(self, request, pk=None):
+        member = self.get_object()
+        member.status = Member.MembershipStatus.ACTIVE
+        member.save(update_fields=["status"])
+        return Response({"message": "Member reactivated."},status=status.HTTP_200_OK)
     
     @action(detail=False,methods=["get"],permission_classes=[IsMember])
     def me(self, request):

@@ -4,6 +4,7 @@ from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from apps.books.models import Book
 from .models import Borrowing
+from apps.members.models import Member
 
 
 @transaction.atomic
@@ -12,6 +13,9 @@ def borrow_book(*, book, member):
     """
     Services for borrowing book.
     """
+
+    if member.status != Member.MembershipStatus.ACTIVE:
+        raise ValidationError("Your membership is suspended.")
 
     book = Book.objects.select_for_update().get(pk=book.pk)
 
@@ -66,7 +70,7 @@ def pay_fine(*, borrowing, member):
     """
     Services for paying fine.
     """
-    
+
     if borrowing.member != member:
         raise ValidationError("You cannot pay this fine.")
 

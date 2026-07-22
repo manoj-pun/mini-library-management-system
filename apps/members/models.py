@@ -8,7 +8,7 @@ class Member(models.Model):
         SUSPENDED = "SUSPENDED", "Suspended"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="member")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="member")
     membership_number = models.CharField(max_length=20, editable=False, unique=True)
     phone_number = models.CharField(max_length=15)
     address = models.TextField(blank=True)

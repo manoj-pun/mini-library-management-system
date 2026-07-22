@@ -10,9 +10,7 @@ def generate_membership_number():
     """
 
     last = (Member.objects.select_for_update().order_by("-joined_date").first())
-
     next_number = (1 if not last else int(last.membership_number.split("-")[1]) + 1)
-
     return f"MEM-{next_number:05d}"
 
 
@@ -37,7 +35,6 @@ def create_member(*, first_name, last_name, email, password, phone_number, addre
         phone_number = phone_number,
         address = address
     )
-
     return member
 
 
