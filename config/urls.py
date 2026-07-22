@@ -21,6 +21,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView
 )
 from .views import home
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +31,9 @@ urlpatterns = [
     path("api/token/refresh/",TokenRefreshView.as_view(), name="refresh_token"),
 
     path("silk/", include("silk.urls", namespace="silk")),
+
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/swagger-ui", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 
     path('api/', include("apps.authors.urls")),
     path('api/', include("apps.books.urls")),

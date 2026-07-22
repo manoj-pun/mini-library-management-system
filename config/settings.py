@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     #django-silk for profiling
     "silk",
 
+    #drf_spectacular for docs
+    "drf_spectacular",
+
     #apps
     "apps.users.apps.UsersConfig",
     "apps.authors.apps.AuthorsConfig",
@@ -68,7 +71,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES":[
         "rest_framework_simplejwt.authentication.JWTAuthentication"
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS":"drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
