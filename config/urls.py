@@ -29,6 +29,8 @@ urlpatterns = [
     path("api/token/",TokenObtainPairView.as_view(), name="obtain_token"),
     path("api/token/refresh/",TokenRefreshView.as_view(), name="refresh_token"),
 
+    path("silk/", include("silk.urls", namespace="silk")),
+
     path('api/', include("apps.authors.urls")),
     path('api/', include("apps.books.urls")),
     path('api/', include("apps.members.urls")),
