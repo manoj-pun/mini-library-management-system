@@ -65,18 +65,14 @@ def return_book(*, borrowing, member):
 
 
 @transaction.atomic
-def pay_fine(*, borrowing, member):
+def pay_fine(*, borrowing):
 
     """
     Services for paying fine.
     """
 
-    if borrowing.member != member:
-        raise ValidationError("You cannot pay this fine.")
-
     if borrowing.fine_amount <= 0:
         raise ValidationError("There is no fine to pay.")
-    
     if borrowing.fine_paid:
         raise ValidationError("This fine has already been paid.")
 

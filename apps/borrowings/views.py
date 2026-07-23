@@ -13,6 +13,7 @@ from .services import (
     return_book,
     pay_fine
 )
+from apps.common.permissions import IsLibrarian
 
 class BorrowingViewSet(ReadOnlyModelViewSet):
 
@@ -54,11 +55,8 @@ class BorrowingViewSet(ReadOnlyModelViewSet):
         )
         return Response(BorrowDetailSerializer(borrowing).data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=["post"], url_path="pay-fine")
+    @action(detail=True, methods=["post"], url_path="pay-fine", permission_classes=[IsLibrarian])
     def pay_fine_action(self, request, pk=None):
         borrowing = self.get_object()
-        borrowing = pay_fine(
-            borrowing=borrowing,
-            member=self.request.user.member
-        )
+        borrowing = pay_fine(borrowing=borrowing)
         return Response(BorrowDetailSerializer(borrowing).data, status=status.HTTP_200_OK)
