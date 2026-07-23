@@ -10,7 +10,7 @@ class AuthorNestedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ["id", "first_name", "last_name"]
+        fields = ["first_name", "last_name"]
 
 
 class BookCreateUpdateSerializer(serializers.ModelSerializer):
@@ -41,10 +41,11 @@ class BookListSerializer(serializers.ModelSerializer):
     """
     Serializer class for listing books.
     """
+    authors = AuthorNestedSerializer(many=True, read_only=True)
 
     class Meta:
         model = Book
-        fields = ["id", "title", "isbn", "available_copies"]
+        fields = ["id", "title", "isbn", "authors", "available_copies"]
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
