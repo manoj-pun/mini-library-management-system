@@ -1,6 +1,5 @@
 # Mini Library Management System
-Backend assignment for Imagio Creations Pvt. Ltd. — a REST API for managing
-library authors, books, members, and borrowing, built with Django REST Framework.
+A RESTful API for managing library resources, user memberships, book availability, and borrowing activities using Django REST Framework.
 
 ## Features
 
