@@ -38,4 +38,13 @@ def create_member(*, first_name, last_name, email, password, phone_number, addre
     return member
 
 
-##Suspend user 
+def suspend_member(*, member):
+    member.status = Member.MembershipStatus.SUSPENDED
+    member.save(update_fields=["status"])
+    return member
+
+
+def reactivate_member(*, member):
+    member.status = Member.MembershipStatus.ACTIVE
+    member.save(update_fields=["status"])
+    return member

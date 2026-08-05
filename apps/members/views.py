@@ -11,6 +11,7 @@ from .serializers import (
     MemberListSerializer,
     MemberDetailSerializer
 )
+from .services import suspend_member, reactivate_member
 
 class MemberViewSet(ModelViewSet):
 
@@ -44,17 +45,13 @@ class MemberViewSet(ModelViewSet):
 
     @action(detail=True, methods=["post"], url_path="suspend")
     def suspend(self, request, pk=None):
-        member = self.get_object()
-        member.status = Member.MembershipStatus.SUSPENDED
-        member.save(update_fields=["status"])
-        return Response({"message": "Member suspended."},status=status.HTTP_200_OK)
+        member = suspend_member(member=self.get_object())
+        return Response({"message": "Member suspended."}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["post"], url_path="reactivate")
     def reactivate(self, request, pk=None):
-        member = self.get_object()
-        member.status = Member.MembershipStatus.ACTIVE
-        member.save(update_fields=["status"])
-        return Response({"message": "Member reactivated."},status=status.HTTP_200_OK)
+        member = reactivate_member(member=self.get_object())
+        return Response({"message": "Member reactivated."}, status=status.HTTP_200_OK)
     
     @action(detail=False,methods=["get"],permission_classes=[IsMember])
     def me(self, request):
