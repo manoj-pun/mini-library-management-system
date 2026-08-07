@@ -5,6 +5,7 @@ from apps.authors.factories import AuthorFactory
 class BookFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Book
+        skip_postgeneration_save = True
 
     title = factory.Faker("sentence", nb_words=3)
     isbn = factory.Sequence(lambda n: f"978000000{n:04d}")
